@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${book.title}">Book Detail</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/book-details.css">
+</head>
+<body>
+    <button class="toggle-theme" onclick="toggleTheme()">Toggle Theme</button>
+
+    <div class="container">
+    
+    	
+        <h1 th:text="${book.title}">Book Title</h1>
+        <p><strong>Author:</strong> <span th:text="${book.author}"></span></p>
+        <p><strong>Genre:</strong> <span th:text="${book.genre}"></span></p>
+        <p><strong>Description:</strong></p>
+        <p th:text="${book.description}"></p>
+
+        <h2>Comments</h2>
+
+        <div class="comments-section">
+            <div th:each="comment : ${comments}" class="comment-card">
+                <p class="comment-text" th:text="${comment.content}"></p>
+                <p class="comment-meta">— <span th:text="${comment.username}"></span>, 
+                    <span th:text="${comment.timestamp}"></span></p>
+            </div>
+
+            <form th:action="@{'/books/' + ${book.id} + '/comments?commented=true'}" method="post" th:object="${newComment}" class="comment-form">
+                <label for="username">Name</label>
+                <input type="text" th:field="*{username}" placeholder="Your name" required />
+
+                <label for="content">Comment</label>
+                <textarea th:field="*{content}" placeholder="Write your comment..." required></textarea>
+
+                <button type="submit">Post Comment</button>
+            </form>
+        </div>
+
+        <a href="/books" class="add-book-link">← Back to list</a>
+    </div>
+
+    <div id="comment-toast">Commented! 💬</div>
+
+    <script>
+        if (window.location.href.includes("commented=true")) {
+            const toast = document.getElementById("comment-toast");
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3000);
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle("dark-mode");
+        }
+    </script>
+</body>
+</html>
