@@ -1,0 +1,206 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --box-bg: #f5f5f5;
+    --accent-color: #6a0dad;
+    --hover-color: #4b0082;
+    --input-bg: #ffffff;
+    --card-shadow: rgba(0, 0, 0, 0.08);
+    --toast-bg: #6a0dad;
+}
+
+body.dark-mode {
+    --bg-color: #1e1e1e;
+    --text-color: #f0f0f0;
+    --box-bg: #2b2b2b;
+    --accent-color: #bb86fc;
+    --hover-color: #a974f8;
+    --input-bg: #2b2b2b;
+    --card-shadow: rgba(255, 255, 255, 0.05);
+    --toast-bg: #bb86fc;
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: url('/images/bookdoodles.jpg'), linear-gradient(135deg, #e0c3fc, #ffffff);
+    background-repeat: repeat, no-repeat;
+    background-size: 200px, cover;
+    background-attachment: fixed;
+    background-position: center, center;
+    font-family: 'Georgia', serif;
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: var(--box-bg);
+    border-radius: 12px;
+    box-shadow: 0 0 10px var(--card-shadow);
+    transition: background-color 0.3s ease;
+}
+
+h1, h2, h3 {
+    color: var(--accent-color);
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: var(--hover-color);
+}
+
+button, .btn {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover, .btn:hover {
+    background-color: var(--hover-color);
+    transform: scale(1.05);
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0 12px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.toggle-theme {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-theme:hover {
+    background-color: var(--hover-color);
+}
+
+/* Comments Section */
+.comments-section {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: var(--box-bg);
+    border-radius: 8px;
+    box-shadow: 0 0 10px var(--card-shadow);
+}
+
+.comment-card {
+    background-color: var(--input-bg);
+    border-left: 4px solid var(--accent-color);
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px var(--card-shadow);
+}
+
+.comment-text {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.comment-meta {
+    font-size: 13px;
+    color: #777;
+    font-style: italic;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.comment-form label {
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.comment-form input[type="text"],
+.comment-form textarea {
+    background-color: var(--input-bg);
+    border: 1px solid #ccc;
+    color: var(--text-color);
+    font-size: 14px;
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.comment-form button {
+    align-self: flex-start;
+}
+
+/* Toast Animation */
+#comment-toast {
+    display: none;
+    position: fixed;
+    top: 50px;
+    right: 30px;
+    background-color: var(--toast-bg);
+    color: white;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#comment-toast.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    animation: floatFade 3s ease-out forwards;
+}
+
+@keyframes floatFade {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    90% {
+        opacity: 1;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+}
